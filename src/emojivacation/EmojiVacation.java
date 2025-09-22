@@ -6,7 +6,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import emojivacation.ProvidedEmojis;
+
 
 @SuppressWarnings("SameParameterValue")
 public class EmojiVacation {
@@ -106,15 +106,16 @@ public class EmojiVacation {
         //
             int choice = randomInt(1, 4);
             if (choice == 1) {
-                return emojis.createSmileyFace(size);
+                return Emojis.createSmileyFace(size);
             } else if (choice == 2) {
-                return emojis.createContentedFace(size);
+                return Emojis.createFrownyFace(size);
             } else if (choice == 3) {
-                return emojis.createWinkingFace(size);
+                return Emojis.createWinkingFace(size);
             } else {
-                return emojis.createNauseousFace(size);
+                return Emojis.createNauseousFace(size);
             }
             // Temporary: default to smiley until you create a third face
+                return Emojis.createSmileyFace(size);
     
 
     }

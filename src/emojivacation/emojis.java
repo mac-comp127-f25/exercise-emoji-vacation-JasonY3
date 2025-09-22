@@ -5,7 +5,7 @@ import edu.macalester.graphics.*;
 import java.awt.Color;
 
 @SuppressWarnings("WeakerAccess")  // This stops Java from giving you warnings about your code that are not helpful here
-public class emojis {
+public class Emojis {
     private static final Color
         HEAD_COLOR = new Color(0xFFDE30),
         HEAD_OUTLINE_COLOR = new Color(0xAC9620),
@@ -59,6 +59,26 @@ public class emojis {
         return group;
     }
 
+    public static GraphicsGroup createFrownyFace(double size) {
+        GraphicsGroup group = new GraphicsGroup();
+
+        group.add(createHead(size, size));
+
+        GraphicsGroup leftEye = (createEye(size * 0.15));
+        leftEye.setCenter(size * 0.3, size * 0.3);
+        group.add(leftEye);
+
+        GraphicsGroup rightEye = createEye(size * 0.15);
+        rightEye.setCenter(size * 0.7, size * 0.3);
+        group.add(rightEye);
+
+        Arc mouth = createFrown(size * 0.6, size * 0.5);
+        mouth.setCenter(size * 0.5, size * 0.7);
+        group.add(mouth);
+
+        return group;
+    }
+
     /**
      * Creates an empty emoji head. The head fits inside the box from (0,0)
      * to (width,height).
@@ -93,4 +113,6 @@ public class emojis {
         eye.setStrokeWidth(2);
         return eye;
     }
+
+
 }
