@@ -58,7 +58,7 @@ public class EmojiVacation {
         addGround(canvas, 400);
 
         if (percentChance(60)) {
-            addForest(canvas, 550, 100, randomInt(20, 50));
+            addForest(canvas, 550, 100, randomInt(20, 40));
         }
 
         List<GraphicsGroup> family = createFamily(2, 3);
@@ -84,15 +84,15 @@ public class EmojiVacation {
 
     private static GraphicsGroup createRandomEmoji(double size) {
         if (percentChance(20)) {
-            return ProvidedEmojis.createFrownyFace(size);
-        } else if (percentChance(20)) {
             return ProvidedEmojis.createWinkingFace(size);
         } else if (percentChance(20)) {
-            return ProvidedEmojis.createNauseousFace(size);
+            return ProvidedEmojis.createFrownyFace(size);
+        } else if (percentChance(20)) {
+            return ProvidedEmojis.createSmileyFace(size);
         } else if (percentChance(20)) {
             return ProvidedEmojis.createContentedFace(size);
         } else {
-            return ProvidedEmojis.createSmileyFace(size);
+            return ProvidedEmojis.createNauseousFace(size);
         }
     }
 
