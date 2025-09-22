@@ -48,9 +48,8 @@ public class EmojiVacation {
         //       (within reasonable constraints).
 
         if (percentChance(50)) {
-            addMountains(canvas, SCENE_HEIGHT, randomInt(SCENE_WIDTH, SCENE_HEIGHT), randomInt(1, 3));
+            addMountains(canvas, 400, randomInt(50, 120), randomInt(1, 3));
         }
-
 
     
         addGround(canvas, 400);
@@ -60,12 +59,15 @@ public class EmojiVacation {
         //       other parameters.
 
         if (percentChance(60)) {
-            addForest(canvas, SCENE_HEIGHT, randomInt(SCENE_WIDTH, SCENE_HEIGHT), randomInt(1, 3));
+            addForest(canvas, 400, randomInt(80, 200), randomInt(10, 32));
         }
     
         List<GraphicsGroup> family = createFamily(2, 3);
         positionFamily(family, 60, 550, 20);
         // TODO: [Instructions step 4] Add each emoji in the list to the canvas
+        for (GraphicsGroup member:family) {
+            canvas.add(member);
+        }
     }
 
     // –––––– Emoji family –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -80,10 +82,18 @@ public class EmojiVacation {
         // Hint: You can't use List.of() to do this, because you don't know the size of the
         // resulting list before the code actually runs. What can you use?
         //
-        return List.of(
-            createRandomEmoji(adultSize),
-            createRandomEmoji(childSize));
+        List<GraphicsGroup> family = new ArrayList<>();
+        for (int i = 0; i < adultCount; i++) {
+            family.add(createRandomEmoji(adultSize));
+        }
+        for (int i = 0; i < childCount; i++) {
+            family.add(createRandomEmoji(childSize));
+        }
+        return family;
+    
+
     }
+    
 
     private static GraphicsGroup createRandomEmoji(double size) {
         // TODO: [Instructions step 7] Change this so that instead of always creating a smiley face,
@@ -93,7 +103,19 @@ public class EmojiVacation {
         // type A, else with some other probability return emoji type B, else with a certain
         // probability ... etc ... else return a smiley by default.
         //
-        return ProvidedEmojis.createSmileyFace(size);
+            int choice = randomInt(1, 4);
+            if (choice == 1) {
+                return emojis.createSmileyFace(size);
+            } else if (choice == 2) {
+                return emojis.createContentedFace(size);
+            } else if (choice == 3) {
+                return emojis.createWinkingFace(size);
+            } else {
+                return emojis.createNauseousFace(size);
+            }
+            // Temporary: default to smiley until you create a third face
+    
+
     }
 
     private static void positionFamily(
@@ -102,6 +124,17 @@ public class EmojiVacation {
             double baselineY,
             double spacing
     ) {
+        double currentX = leftX;
+
+        for (GraphicsGroup emoji : family) {
+        // Align the *bottom* of the emoji to baselineY
+            double x = currentX;
+            double y = baselineY - emoji.getHeight(); // since setPosition() uses top-left corner
+            emoji.setPosition(x, y);
+
+            // Update currentX for the next emoji: add width of this emoji + spacing
+            currentX += emoji.getWidth() + spacing;
+        }
         // TODO: [Instructions step 5] Iterate over the emojis in the list,
         //       and position them all in a neat row
 
