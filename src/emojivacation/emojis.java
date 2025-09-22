@@ -59,25 +59,7 @@ public class Emojis {
         return group;
     }
 
-    public static GraphicsGroup createFrownyFace(double size) {
-        GraphicsGroup group = new GraphicsGroup();
-
-        group.add(createHead(size, size));
-
-        GraphicsGroup leftEye = (createEye(size * 0.15));
-        leftEye.setCenter(size * 0.3, size * 0.3);
-        group.add(leftEye);
-
-        GraphicsGroup rightEye = createEye(size * 0.15);
-        rightEye.setCenter(size * 0.7, size * 0.3);
-        group.add(rightEye);
-
-        Arc mouth = createFrown(size * 0.6, size * 0.5);
-        mouth.setCenter(size * 0.5, size * 0.7);
-        group.add(mouth);
-
-        return group;
-    }
+    
 
     /**
      * Creates an empty emoji head. The head fits inside the box from (0,0)
